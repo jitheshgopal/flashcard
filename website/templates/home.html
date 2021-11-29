@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %}Home{% endblock%}
+{%block content %}
+      <h1 align='center'>Welcome  {{user.first_name}}</h1>
+      <h2 align ='center'>Your Collections</h2>
+      <ul class="list-group list-group-flush" id='collections'>
+          {%for collection in user.collections%}
+          <li class="list-group-item">
+            {{collection.id}} : {{collection.name}}
+          <button type="button" class="close" onclick="deleteColl( {{collection.id}})">           
+              <span aria-hidden="true">&times;</span>
+          </button>
+            </li>
+          {% endfor %} 
+      </ul>
+      <form method="POST">
+          <h2 align='center'>Create a new collection</h2>
+        <div class="form-group">
+            <label for="name">Name of collection</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              placeholder="Enter a name for collection"
+            />
+          </div>
+          <br />
+          <button type="submit" class="btn btn-primary">Create</button>       
+      </form>
+      
+
+{%endblock%}

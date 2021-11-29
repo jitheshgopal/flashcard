@@ -1,0 +1,40 @@
+{% extends "base.html" %} {% block title %}Edit a collection{% endblock%}
+{%block content %}
+      <h1 align='center'>Welcome  {{user.first_name}}</h1>
+      <h2 align ='center'>Your Cards</h2>
+      <ul class="list-group list-group-flush" id='cards'>
+          {%for card in collection.cards%}
+          <li class="list-group-item">
+            {{card.id}} : {{card.question}} {{card.answer}}
+          <button type="button" class="close" onclick="deleteCard( {{card.id}})">           
+              <span aria-hidden="true">&times;</span>
+          </button>
+            </li>
+          {% endfor %} 
+      </ul>
+      <form method="POST">
+          <h2 align='center'>Create a new collection</h2>
+        <div class="form-group">
+            <label for="question">Question</label>
+            <input
+              type="text"
+              class="form-control"
+              id="question"
+              name="question"
+              placeholder="Enter a question for the card"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="answer">Answer for the question</label>
+            <input
+              type="text"
+              class="form-control"
+              id="answer"
+              name="answer"
+              placeholder="Enter the answer"
+            />
+          </div>
+          <br />
+          <button type="submit" class="btn btn-primary">Add</button>       
+      </form>
