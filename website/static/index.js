@@ -6,11 +6,11 @@ function deleteColl(collId) {
       window.location.href = "/";
     });
   }
-  function deleteCard(cardlId) {
+  function deleteCard(cardlId, collid) {
     fetch("/delete-card", {
       method: "POST",
       body: JSON.stringify({ cardlId: cardlId }),
     }).then((_res) => {
-      window.location.href = "/";
+      window.location.href = "/edit-collection/" + collid;
     });
   }

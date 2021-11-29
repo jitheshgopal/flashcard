@@ -23,6 +23,31 @@ def home():
 
     return render_template('home.html', user = current_user) 
 
+
+@views.route('/play-collection/<id>', methods=['GET','POST'])
+def play_coll(id):
+    collection = Collection.query.get(id)
+    if request.method == 'GET':
+        return render_template('play.html', collection = collection,user = current_user )
+    elif request.method == 'POST':
+        return render_template('play.html', collection = collection,user = current_user )
+
+
+@views.route('/edit-collection/<id>', methods=['GET','POST'])
+def edit_coll(id):
+    collection = Collection.query.get(id)
+    if request.method == 'GET':
+        print("Hi there")
+        return render_template('edit_collection.html', collection = collection,user = current_user  )
+    elif request.method == 'POST':
+        question =  request.form.get('question')
+        answer = request.form.get('answer')
+        new_card = Card(question = question, answer = answer, collection_id = collection.id)
+        db.session.add(new_card)
+        db.session.commit()
+        return render_template('edit_collection.html', collection = collection,user = current_user ) 
+
+
 @views.route('/delete-coll', methods=[ 'POST'])
 def delete_coll():
     data = json.loads(request.data)
@@ -38,9 +63,10 @@ def delete_coll():
             db.session.commit()
     return jsonify({})
 
-@views.route('/edit_collection', methods=['POST']) 
-def edit_collection(id):
-    return render_template("edit_collection.html", collection_id = id)
+#@views.route('/edit_collection', methods=['POST']) 
+#def edit_collection(id):
+#    collection = Collection.query.get(id) 
+#    return render_template("edit_collection.html", collection)
     
 @views.route('/delete-card', methods=[ 'POST'])
 def delete_card():

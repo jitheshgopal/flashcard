@@ -6,9 +6,15 @@
           {%for collection in user.collections%}
           <li class="list-group-item">
             {{collection.id}} : {{collection.name}}
-          <button type="button" class="close" onclick="deleteColl( {{collection.id}})">           
+            <a href="/edit-collection/{{collection.id}}">edit</a>
+            <a href="/play-collection/{{collection.id}}">play</a>
+         
+         
+         
+            <button type="button" class="close" onclick="deleteColl( {{collection.id}})">           
               <span aria-hidden="true">&times;</span>
           </button>
+          <!--button type="submit" formaction="/edit_collection/{{collection.id}}">Edit</button-->
             </li>
           {% endfor %} 
       </ul>

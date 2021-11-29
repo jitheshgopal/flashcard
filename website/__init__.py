@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path 
 from flask_login import LoginManager, login_manager
+from flask_restful import Resource, Api, reqparse
 
 db = SQLAlchemy()
 DB_NAME ="database.db"
@@ -13,6 +14,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 
     db.init_app(app)
+    api = Api(app)
 
 
     from .views import views
@@ -29,14 +31,10 @@ def create_app():
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
-
     @login_manager.user_loader
     def load_user(id):
         return User.query.get(int(id))
- 
-
-
-    return app
+    return (app,api)
 
 def create_database(app):
     if not path.exists('website/' + DB_NAME):

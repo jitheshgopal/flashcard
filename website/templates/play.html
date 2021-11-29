@@ -1,0 +1,129 @@
+{% extends "base.html" %} {% block title %}Play ur collection{% endblock%}
+{%block content %}
+      <h1 align='center'>Welcome  {{user.first_name}}</h1>
+      <h2 align ='center'>Your Cards</h2>
+
+      <style>
+.image-flip:hover .backside, .image-flip.hover .backside {
+-webkit-transform: rotateY(0deg);
+-moz-transform: rotateY(0deg);
+-o-transform: rotateY(0deg);
+-ms-transform: rotateY(0deg);
+transform: rotateY(0deg);
+}
+
+.image-flip:hover .frontside, .image-flip.hover .frontside {
+-webkit-transform: rotateY(180deg);
+-moz-transform: rotateY(180deg);
+-o-transform: rotateY(180deg);
+transform: rotateY(180deg);
+}
+
+.image-flip {
+margin-bottom:200px;
+width: 300px;
+height: 250px;
+}
+
+.mainflip {
+-webkit-transition: 1s;
+-webkit-transform-style: preserve-3d;
+-ms-transition: 1s;
+-moz-transition: 1s;
+-moz-transform: perspective(1000px);
+-moz-transform-style: preserve-3d;
+-ms-transform-style: preserve-3d;
+transition: 1s;
+transform-style: preserve-3d;
+position: relative;
+}
+
+.frontside, .backside {
+-webkit-backface-visibility: hidden;
+-moz-backface-visibility: hidden;
+-ms-backface-visibility: hidden;
+backface-visibility: hidden;
+-webkit-transition: 1s;
+-webkit-transform-style: preserve-3d;
+-moz-transition: 1s;
+-moz-transform-style: preserve-3d;
+-o-transition: 1s;
+-o-transform-style: preserve-3d;
+-ms-transition: 1s;
+-ms-transform-style: preserve-3d;
+transition: 1s;
+transform-style: preserve-3d;
+position: absolute;
+top: 0;
+left: 0;
+}
+
+.frontside {
+-webkit-transform: rotateY(0deg);
+-ms-transform: rotateY(0deg);
+z-index: 2;
+}
+
+.backside {
+background: white;
+-webkit-transform: rotateY(-180deg);
+-moz-transform: rotateY(-180deg);
+-o-transform: rotateY(-180deg);
+-ms-transform: rotateY(-180deg);
+transform: rotateY(-180deg);
+}
+
+.card, .card-img-top {
+border-radius: 0;
+}
+
+      </style>
+      <ul class="list-group list-group-flush" id='cards'>
+          {%for card in collection.cards%}
+           
+          
+          
+          
+          
+           <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                <div class="mainflip">
+                    <div class="frontside">
+                        <div class="card" style="width:20rem;">
+                        <img class="card-img-top img- fluid" src="https://img.webnots.com/2017/04/Bootstrap-Card-Image.png" alt="card image">
+                        <div class="card-body">
+                        <h4 class="card-title">Question</h4>
+
+                        <p class="card-text">{{card.question}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="backside">
+                <div class="card" style="width:20rem;">
+                <div class="card-header">
+                This is a Header
+                </div>
+                <div class="card-body">
+                <h4 class="card-title">Answer</h4>
+                <p class="card-text">{{card.answer}}</p>
+                <a href="#" class="btn btn-info btn-md">Info Button</a>
+                </div>
+                <div class="card-footer">
+                {{card.id}}
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+
+          <!--li class="list-group-item">
+            {{card.id}} : {{card.question}} {{card.answer}}
+          <button type="button" class="close" onclick="deleteCard( {{card.id}})">           
+              <span aria-hidden="true">&times;</span>
+          </button>
+            </li-->
+          {% endfor %} 
+      </ul>
+      <a href="/">home</a>
+
+{%endblock%}
